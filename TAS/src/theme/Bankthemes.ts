@@ -10,7 +10,7 @@ export const bankThemes: Record<string, BankThemeInput> = {
   SR2: {
     sourceid: 'SR2',
     bankName: 'ICICI Bank',
-    logoUrl: 'https://cdn.tas.example.com/logos/sr2.svg',
+    logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa1Fho6GG_QT4RZvdYK1IPO7mP0cXYaHf9fXnWDos9DQ&s=10',
     colors: { primary: '#B71234', accent: '#F58220' },
   },
 };

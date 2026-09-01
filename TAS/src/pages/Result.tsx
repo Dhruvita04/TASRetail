@@ -1,18 +1,39 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { CardComponent } from '../components/CardComponent';
+import { MerchantCard } from '../components/MerchantCard';
 import { sampleMerchants } from '../data/merchants';
 import '../theme/theme.css';
 import './Result.css';
 
-const mappedMerchants = sampleMerchants.slice(0, 2);
-const notMappedMerchants = sampleMerchants.slice(2);
+const STORAGE_KEY = 'selected-merchants';
+
+function getSelectedMerchants() {
+  const saved = sessionStorage.getItem(STORAGE_KEY);
+  if (!saved) {
+    return new Set(sampleMerchants.map((merchant) => merchant.tur));
+  }
+
+  try {
+    const parsed = JSON.parse(saved) as string[];
+    return new Set(parsed);
+  } catch {
+    return new Set(sampleMerchants.map((merchant) => merchant.tur));
+  }
+}
 
 export function ResultPage() {
   const navigate = useNavigate();
+  const selectedTurs = getSelectedMerchants();
+
+  const mappedMerchants = sampleMerchants.filter((merchant) => selectedTurs.has(merchant.tur));
+  const notMappedMerchants = sampleMerchants.filter((merchant) => !selectedTurs.has(merchant.tur));
 
   return (
     <div className="result-page">
       <div className="result-page__shell">
+        <CardComponent maskedNumber="4321" status="Active" />
+
         <div className="result-page__success-banner" role="status" aria-live="polite">
           <div className="result-page__success-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -33,36 +54,26 @@ export function ResultPage() {
           <div className="result-page__subheading">Mapped Successfully ({mappedMerchants.length})</div>
           <div className="result-page__list">
             {mappedMerchants.map((merchant) => (
-              <div key={merchant.tur} className="result-page__row">
-                <div className="result-page__merchant" aria-label={`${merchant.name} mapped`}>
-                  <div
-                    className="result-page__merchant-icon"
-                    style={{ background: merchant.iconBackground, color: merchant.iconColor }}
-                  >
-                    {merchant.iconInitial}
-                  </div>
-                  <span>{merchant.name}</span>
-                </div>
-                <span className="result-page__status success">Mapped</span>
-              </div>
+              <MerchantCard
+                key={merchant.tur}
+                merchant={merchant}
+                showCheckbox={false}
+                statusLabel="Mapped"
+                statusTone="success"
+              />
             ))}
           </div>
 
           <div className="result-page__subheading danger">Not Mapped ({notMappedMerchants.length})</div>
           <div className="result-page__list">
             {notMappedMerchants.map((merchant) => (
-              <div key={merchant.tur} className="result-page__row">
-                <div className="result-page__merchant" aria-label={`${merchant.name} not mapped`}>
-                  <div
-                    className="result-page__merchant-icon"
-                    style={{ background: merchant.iconBackground, color: merchant.iconColor }}
-                  >
-                    {merchant.iconInitial}
-                  </div>
-                  <span>{merchant.name}</span>
-                </div>
-                <span className="result-page__status danger">Not Mapped</span>
-              </div>
+              <MerchantCard
+                key={merchant.tur}
+                merchant={merchant}
+                showCheckbox={false}
+                statusLabel="Not Mapped"
+                statusTone="danger"
+              />
             ))}
           </div>
         </div>

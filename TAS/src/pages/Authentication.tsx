@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { OtpInput } from '../components/otp/OtpInput';
 import { ResendTimer } from '../components/otp/ResendTimer';

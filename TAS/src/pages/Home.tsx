@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CardComponent } from '../components/CardComponent';
 import { MerchantList } from '../components/MerchantList';
@@ -8,12 +8,28 @@ import { sampleMerchants } from '../data/merchants';
 import '../theme/theme.css';
 import './Home.css';
 
+const STORAGE_KEY = 'selected-merchants';
+
 export function HomePage() {
   const navigate = useNavigate();
-  const [selectedTurs, setSelectedTurs] = useState<Set<string>>(
-    new Set(sampleMerchants.map((m) => m.tur)) // all selected by default, matches reference
-  );
+  const [selectedTurs, setSelectedTurs] = useState<Set<string>>(() => {
+    const saved = sessionStorage.getItem(STORAGE_KEY);
+    if (!saved) {
+      return new Set(sampleMerchants.map((m) => m.tur));
+    }
+
+    try {
+      const parsed = JSON.parse(saved) as string[];
+      return new Set(parsed);
+    } catch {
+      return new Set(sampleMerchants.map((m) => m.tur));
+    }
+  });
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(selectedTurs)));
+  }, [selectedTurs]);
 
   function handleToggle(tur: string) {
     setSelectedTurs((prev) => {
@@ -29,7 +45,7 @@ export function HomePage() {
       // POST /consent/initiate with Array.from(selectedTurs) goes here
       console.log('Submitting TURs:', Array.from(selectedTurs));
       // await api.initiateConsent(Array.from(selectedTurs));
-      
+
       // On success, navigate to the authentication page
       navigate('/acs');
     } catch (error) {
@@ -55,7 +71,7 @@ export function HomePage() {
       />
 
       <PrimaryButton onClick={handleSubmit} disabled={submitting || selectedTurs.size === 0}>
-        {submitting ? 'Submitting…' : 'Submit' }
+        {submitting ? 'Submitting…' : 'Submit'}
       </PrimaryButton>
       <SecondaryButton onClick={() => window.history.back()}>Cancel</SecondaryButton>
     </div>

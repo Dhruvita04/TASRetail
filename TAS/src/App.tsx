@@ -4,20 +4,23 @@ import { bankThemes } from './theme/Bankthemes';
 import { Navbar } from './components/Navbar';
 import { HomePage } from './pages/Home';
 import './theme/theme.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { AuthenticationPage } from './pages/Authentication';
 import { ResultPage } from './pages/Result';
 import { ErrorPage } from './pages/ErrorPage';
 
-export default function App() {
+function AppContent() {
   // In production, sourceid comes from POST /session/init, not a dropdown.
   // This switcher exists purely to demonstrate — and let you manually
   // verify — that the whole app re-themes the instant sourceid changes.
   const [sourceid, setSourceid] = useState('HDFC'); // default to HDFC, matches reference screenshot
+  const location = useLocation();
+  const shouldShowNavbar = location.pathname !== '/error';
+  const shouldShowBankPreview = location.pathname !== '/error';
 
   return (
-    <BrowserRouter>
-      <ThemeProvider sourceid={sourceid}>
+    <ThemeProvider sourceid={sourceid}>
+      {shouldShowBankPreview && (
         <div className="dev-switcher">
           <label>
             Preview as bank:{' '}
@@ -30,16 +33,23 @@ export default function App() {
             </select>
           </label>
         </div>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/acs" element={<AuthenticationPage />} />
-          <Route path="/result" element={<ResultPage />} />
-          <Route path="/error" element={<ErrorPage />} />
-        </Routes>
-      </ThemeProvider>
-    </BrowserRouter>
+      )}
+      {shouldShowNavbar && <Navbar />}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/acs" element={<AuthenticationPage />} />
+        <Route path="/result" element={<ResultPage />} />
+        <Route path="/error" element={<ErrorPage />} />
+      </Routes>
+    </ThemeProvider>
+  );
+}
 
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }

@@ -18,8 +18,9 @@
   margin-bottom: 32px;
 }
 
-.authentication-page__icon {
-  font-size: 48px;
+.authentication-page__logo {
+  max-width: 80px;
+  height: auto;
   display: inline-block;
   line-height: 1;
 }

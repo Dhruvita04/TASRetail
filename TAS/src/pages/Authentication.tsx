@@ -4,10 +4,12 @@ import { ResendTimer } from '../components/otp/ResendTimer';
 import { ErrorBanner } from '../components/shared/ErrorBanner';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SecondaryButton } from '../components/SecondaryButton';
+import { useBankTheme } from '../theme/ThemeProvider';
 import '../theme/theme.css';
 import './Authentication.css';
 
 export function AuthenticationPage() {
+  const theme = useBankTheme();
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
   const [verifying, setVerifying] = useState(false);
@@ -53,9 +55,11 @@ export function AuthenticationPage() {
     <div className="authentication-page">
       <div className="authentication-page__container">
         <div className="authentication-page__header">
-          <div className="authentication-page__icon">
-            🏦
-          </div>
+          <img 
+            src={theme.logoUrl} 
+            alt={`${theme.bankName} logo`}
+            className="authentication-page__logo"
+          />
         </div>
 
         <h1 className="authentication-page__title">Authenticate to proceed</h1>

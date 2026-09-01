@@ -1,0 +1,47 @@
+.btn {
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.btn--primary {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--brand-primary);
+  color: var(--brand-primary-text);
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: var(--brand-primary-hover);
+}
+
+.btn--primary:active:not(:disabled) {
+  background: var(--brand-primary-active);
+}
+
+.btn--primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn--primary:focus-visible {
+  outline: 2px solid var(--brand-primary-active);
+  outline-offset: 2px;
+}
+
+.btn--secondary {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  color: var(--brand-primary);
+  margin-top: 8px;
+}
+
+.btn--secondary:hover {
+  text-decoration: underline;
+}

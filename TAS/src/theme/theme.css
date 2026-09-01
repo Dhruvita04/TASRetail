@@ -1,0 +1,30 @@
+/* theme/theme.css
+   Colors picked by eye from the reference screenshot.
+   These are the ONLY values that should change per bank —
+   see BankTheme.types.ts / deriveTheme.ts for how they're
+   normally injected at runtime. Hardcoded here as a static
+   reference matching this specific design.
+*/
+:root {
+  --brand-primary: #4F46E5;          /* Submit button, checkboxes */
+  --brand-primary-hover: #4338CA;
+  --brand-primary-active: #3730A3;
+  --brand-primary-text: #FFFFFF;     /* text on the Submit button */
+
+  --brand-success-bg: #DCFCE7;       /* "Active" badge background */
+  --brand-success-text: #15803D;     /* "Active" badge text */
+
+  --text-heading: #111827;
+  --text-body: #374151;
+  --text-muted: #9CA3AF;
+
+  --surface: #FFFFFF;
+  --surface-muted: #F9FAFB;
+  --border: #E5E7EB;
+
+  --radius-card: 16px;
+  --radius-pill: 999px;
+  --radius-checkbox: 6px;
+
+  --font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+}

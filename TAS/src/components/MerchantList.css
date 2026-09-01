@@ -1,0 +1,5 @@
+.merchant-list {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}

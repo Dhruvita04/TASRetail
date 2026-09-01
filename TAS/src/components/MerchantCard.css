@@ -1,0 +1,73 @@
+.merchant-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 4px;
+  cursor: pointer;
+}
+
+.merchant-card + .merchant-card {
+  border-top: 1px solid var(--border);
+}
+
+.merchant-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.merchant-card__name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.merchant-card__category {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* the native checkbox stays functionally in place (keyboard, screen readers,
+   click target from the <label>) but is visually hidden — the .checkbox-box
+   span is what's actually painted. This avoids relying on ::after on a
+   replaced <input> element, which some browsers render inconsistently. */
+.merchant-card__checkbox-input {
+  position: absolute;
+  opacity: 0;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.merchant-card__checkbox-box {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-checkbox);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.merchant-card__checkbox-input:checked + .merchant-card__checkbox-box {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+.merchant-card__checkbox-input:checked + .merchant-card__checkbox-box svg {
+  display: block;
+}
+
+.merchant-card__checkbox-box svg {
+  display: none;
+}
+
+.merchant-card__checkbox-input:focus-visible + .merchant-card__checkbox-box {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}

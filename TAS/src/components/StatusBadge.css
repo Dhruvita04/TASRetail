@@ -1,0 +1,18 @@
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge--success {
+  background: var(--brand-success-bg);
+  color: var(--brand-success-text);
+}
+
+.status-badge--neutral {
+  background: var(--surface-muted);
+  color: var(--text-muted);
+}

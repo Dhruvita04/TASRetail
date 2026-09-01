@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { OtpInput } from '../components/otp/OtpInput';
 import { ResendTimer } from '../components/otp/ResendTimer';
 import { ErrorBanner } from '../components/shared/ErrorBanner';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SecondaryButton } from '../components/SecondaryButton';
+import { useBankTheme } from '../theme/ThemeProvider';
 import '../theme/theme.css';
 import './Authentication.css';
 
 export function AuthenticationPage() {
+  const theme = useBankTheme();
+  const navigate = useNavigate();
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
   const [verifying, setVerifying] = useState(false);
@@ -26,10 +30,10 @@ export function AuthenticationPage() {
       // On success, navigate to /result
       // On failure (e.g., expired OTP), set error message
       console.log('Verifying OTP:', otp);
-      
+
       // Simulated success - replace with actual API call
       // await api.verifyOtp(otp);
-      // navigate('/result');
+      navigate('/result');
     } catch (err) {
       setError('Invalid or expired OTP. Please try again.');
     } finally {
@@ -53,9 +57,11 @@ export function AuthenticationPage() {
     <div className="authentication-page">
       <div className="authentication-page__container">
         <div className="authentication-page__header">
-          <div className="authentication-page__icon">
-            🏦
-          </div>
+          <img 
+            src={theme.logoUrl} 
+            alt={`${theme.bankName} logo`}
+            className="authentication-page__logo"
+          />
         </div>
 
         <h1 className="authentication-page__title">Authenticate to proceed</h1>

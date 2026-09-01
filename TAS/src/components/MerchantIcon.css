@@ -9,3 +9,18 @@
   font-weight: 700;
   flex-shrink: 0;
 }
+
+/* real logos usually come as square PNG/SVG with transparent backgrounds
+   or their own padding — a white card + object-fit keeps mixed aspect
+   ratios (wordmarks vs icon marks) looking consistent in the same grid */
+.merchant-icon--logo {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  padding: 6px;
+}
+
+.merchant-icon--logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

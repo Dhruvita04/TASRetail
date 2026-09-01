@@ -1,17 +1,32 @@
-// src/App.tsx
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { ThemeProvider } from './theme/ThemeProvider';
+import { bankThemes } from './theme/Bankthemes';
+import { Navbar } from './components/Navbar';
 import { HomePage } from './pages/Home';
-import { AuthenticationPage } from './pages/Authentication';
+import './theme/theme.css';
 
 export default function App() {
+  // In production, sourceid comes from POST /session/init, not a dropdown.
+  // This switcher exists purely to demonstrate — and let you manually
+  // verify — that the whole app re-themes the instant sourceid changes.
+  const [sourceid, setSourceid] = useState('HDFC'); // default to HDFC, matches reference screenshot
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/home" replace />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/acs" element={<AuthenticationPage />} />
-        {/* /result route goes here once built */}
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider sourceid={sourceid}>
+      <div className="dev-switcher">
+        <label>
+          Preview as bank:{' '}
+          <select value={sourceid} onChange={(e) => setSourceid(e.target.value)}>
+            {Object.values(bankThemes).map((bank) => (
+              <option key={bank.sourceid} value={bank.sourceid}>
+                {bank.bankName}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+      <Navbar />
+      <HomePage />
+    </ThemeProvider>
   );
 }

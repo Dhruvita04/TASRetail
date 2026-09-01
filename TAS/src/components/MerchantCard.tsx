@@ -6,6 +6,7 @@ export interface Merchant {
   tur: string;           // Token Unique Reference — identifies this token
   name: string;
   category: string;
+  logoUrl?: string;      // real logo — falls back to initial square if absent
   iconInitial: string;
   iconBackground: string;
   iconColor: string;
@@ -21,9 +22,11 @@ export function MerchantCard({ merchant, checked, onToggle }: MerchantCardProps)
   return (
     <label className="merchant-card">
       <MerchantIcon
+        logoUrl={merchant.logoUrl}
         initial={merchant.iconInitial}
         background={merchant.iconBackground}
         color={merchant.iconColor}
+        alt={`${merchant.name} logo`}
       />
       <div className="merchant-card__text">
         <span className="merchant-card__name">{merchant.name}</span>

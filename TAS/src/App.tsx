@@ -7,6 +7,7 @@ import './theme/theme.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AuthenticationPage } from './pages/Authentication';
 import { ResultPage } from './pages/Result';
+import { ErrorPage } from './pages/ErrorPage';
 
 export default function App() {
   // In production, sourceid comes from POST /session/init, not a dropdown.
@@ -34,7 +35,8 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/acs" element={<AuthenticationPage />} />
-          <Route path ="/result" element={<ResultPage />} />
+          <Route path="/result" element={<ResultPage />} />
+          <Route path="/error" element={<ErrorPage />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

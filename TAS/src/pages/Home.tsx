@@ -31,6 +31,27 @@ export function HomePage() {
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(selectedTurs)));
   }, [selectedTurs]);
 
+  useEffect(() => {
+    const triggerSessionFlow = async () => {
+      try {
+        await fetch('/session/init', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ consentLink: 'demo-link' }),
+        });
+
+        await fetch('/merchants', {
+          method: 'GET',
+          headers: { Accept: 'application/json' },
+        });
+      } catch (error) {
+        console.info('Demo endpoint request recorded in Network tab:', error);
+      }
+    };
+
+    void triggerSessionFlow();
+  }, []);
+
   function handleToggle(tur: string) {
     setSelectedTurs((prev) => {
       const next = new Set(prev);
@@ -42,11 +63,12 @@ export function HomePage() {
   async function handleSubmit() {
     setSubmitting(true);
     try {
-      // POST /consent/initiate with Array.from(selectedTurs) goes here
-      console.log('Submitting TURs:', Array.from(selectedTurs));
-      // await api.initiateConsent(Array.from(selectedTurs));
+      await fetch('/consent/initiate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ selectedTurs: Array.from(selectedTurs) }),
+      });
 
-      // On success, navigate to the authentication page
       navigate('/acs');
     } catch (error) {
       console.error('Submit failed:', error);

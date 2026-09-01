@@ -26,13 +26,12 @@ export function AuthenticationPage() {
     setError('');
 
     try {
-      // POST /acs/authenticate with { otp } goes here
-      // On success, navigate to /result
-      // On failure (e.g., expired OTP), set error message
-      console.log('Verifying OTP:', otp);
+      await fetch('/consent/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ otp }),
+      });
 
-      // Simulated success - replace with actual API call
-      // await api.verifyOtp(otp);
       navigate('/result');
     } catch (err) {
       setError('Invalid or expired OTP. Please try again.');

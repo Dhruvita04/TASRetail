@@ -21,6 +21,52 @@
   margin: 0 0 28px;
 }
 
+.home-page__purpose-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  margin: 0 0 24px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+}
+
+.home-page__purpose-title {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-heading);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home-page__endpoint-list {
+  display: grid;
+  gap: 12px;
+}
+
+.home-page__endpoint-item {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(79, 70, 229, 0.03);
+  border: 1px solid rgba(79, 70, 229, 0.08);
+}
+
+.home-page__endpoint-link {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--brand-primary);
+  text-decoration: underline;
+  margin-bottom: 6px;
+}
+
+.home-page__endpoint-meta {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-body);
+}
+
 .home-page__section-label {
   font-size: 13px;
   font-weight: 600;

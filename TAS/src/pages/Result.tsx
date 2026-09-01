@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CardComponent } from '../components/CardComponent';
 import { MerchantCard } from '../components/MerchantCard';
@@ -25,6 +25,21 @@ function getSelectedMerchants() {
 export function ResultPage() {
   const navigate = useNavigate();
   const selectedTurs = getSelectedMerchants();
+
+  useEffect(() => {
+    const pollStatus = async () => {
+      try {
+        await fetch('/status', {
+          method: 'GET',
+          headers: { Accept: 'application/json' },
+        });
+      } catch (error) {
+        console.info('Status polling request recorded in Network tab:', error);
+      }
+    };
+
+    void pollStatus();
+  }, []);
 
   const mappedMerchants = sampleMerchants.filter((merchant) => selectedTurs.has(merchant.tur));
   const notMappedMerchants = sampleMerchants.filter((merchant) => !selectedTurs.has(merchant.tur));

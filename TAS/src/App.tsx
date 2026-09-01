@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
 import { ThemeProvider } from './theme/ThemeProvider';
 import { bankThemes } from './theme/Bankthemes';
 import { Navbar } from './components/Navbar';
 import { HomePage } from './pages/Home';
 import './theme/theme.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AuthenticationPage } from './pages/Authentication';
+import { ResultPage } from './pages/Result';
 
 export default function App() {
   // In production, sourceid comes from POST /session/init, not a dropdown.
@@ -33,8 +34,10 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/acs" element={<AuthenticationPage />} />
+          <Route path ="/result" element={<ResultPage />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
+
   );
 }

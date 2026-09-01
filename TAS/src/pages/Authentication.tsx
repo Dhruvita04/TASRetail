@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { OtpInput } from '../components/otp/OtpInput';
 import { ResendTimer } from '../components/otp/ResendTimer';
 import { ErrorBanner } from '../components/shared/ErrorBanner';
@@ -8,6 +9,7 @@ import '../theme/theme.css';
 import './Authentication.css';
 
 export function AuthenticationPage() {
+  const navigate = useNavigate();
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
   const [verifying, setVerifying] = useState(false);
@@ -26,10 +28,10 @@ export function AuthenticationPage() {
       // On success, navigate to /result
       // On failure (e.g., expired OTP), set error message
       console.log('Verifying OTP:', otp);
-      
+
       // Simulated success - replace with actual API call
       // await api.verifyOtp(otp);
-      // navigate('/result');
+      navigate('/result');
     } catch (err) {
       setError('Invalid or expired OTP. Please try again.');
     } finally {

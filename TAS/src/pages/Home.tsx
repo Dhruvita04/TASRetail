@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CardComponent } from '../components/CardComponent';
 import { MerchantList } from '../components/MerchantList';
 import { PrimaryButton } from '../components/PrimaryButton';
@@ -8,6 +9,7 @@ import '../theme/theme.css';
 import './Home.css';
 
 export function HomePage() {
+  const navigate = useNavigate();
   const [selectedTurs, setSelectedTurs] = useState<Set<string>>(
     new Set(sampleMerchants.map((m) => m.tur)) // all selected by default, matches reference
   );
@@ -23,8 +25,17 @@ export function HomePage() {
 
   async function handleSubmit() {
     setSubmitting(true);
-    // POST /consent/initiate with Array.from(selectedTurs) goes here,
-    // then navigate to the /acs authentication route on success.
+    try {
+      // POST /consent/initiate with Array.from(selectedTurs) goes here
+      console.log('Submitting TURs:', Array.from(selectedTurs));
+      // await api.initiateConsent(Array.from(selectedTurs));
+      
+      // On success, navigate to the authentication page
+      navigate('/acs');
+    } catch (error) {
+      console.error('Submit failed:', error);
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -44,7 +55,7 @@ export function HomePage() {
       />
 
       <PrimaryButton onClick={handleSubmit} disabled={submitting || selectedTurs.size === 0}>
-        {submitting ? 'Submitting…' : 'Submit'}
+        {submitting ? 'Submitting…' : 'Submit' }
       </PrimaryButton>
       <SecondaryButton onClick={() => window.history.back()}>Cancel</SecondaryButton>
     </div>

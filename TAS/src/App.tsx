@@ -1,6 +1,7 @@
 // src/App.tsx
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HomePage } from './pages/Home';
+import { AuthenticationPage } from './pages/Authentication';
 
 export default function App() {
   return (
@@ -8,7 +9,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="/home" element={<HomePage />} />
-        {/* /acs and /result routes go here once built */}
+        <Route path="/acs" element={<AuthenticationPage />} />
+        {/* /result route goes here once built */}
       </Routes>
     </BrowserRouter>
   );

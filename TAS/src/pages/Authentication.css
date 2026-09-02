@@ -1,7 +1,7 @@
 .authentication-page {
-  min-height: 100vh;
+  min-height: calc(100vh - 72px);
   background: var(--surface);
-  padding: 24px 16px;
+  padding: clamp(20px, 3vw, 40px) clamp(12px, 2vw, 24px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,8 +9,7 @@
 }
 
 .authentication-page__container {
-  width: 100%;
-  max-width: 440px;
+  width: min(100%, 560px);
 }
 
 .authentication-page__header {
@@ -52,11 +51,17 @@
 
 @media (max-width: 480px) {
   .authentication-page {
-    padding: 16px 12px;
+    width: 100%;
+    max-width: 100%;
+    min-height: calc(100vh - 72px);
+    padding: 12px 12px 20px;
+    align-items: flex-start;
   }
 
   .authentication-page__container {
+    width: 100%;
     max-width: 100%;
+    padding: 0;
   }
 
   .authentication-page__title {

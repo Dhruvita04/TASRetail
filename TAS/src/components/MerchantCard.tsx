@@ -1,4 +1,3 @@
-import React from 'react';
 import { MerchantIcon } from './MerchantIcon';
 import './MerchantCard.css';
 

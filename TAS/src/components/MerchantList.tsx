@@ -1,4 +1,3 @@
-import React from 'react';
 import { MerchantCard, type Merchant } from './MerchantCard';
 import './MerchantList.css';
 

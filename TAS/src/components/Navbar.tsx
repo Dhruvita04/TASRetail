@@ -1,4 +1,3 @@
-import React from 'react';
 import { useBankTheme } from '../theme/ThemeProvider';
 import { BankLogo } from './BankLogo';
 import './Navbar.css';

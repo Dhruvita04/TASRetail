@@ -4,7 +4,7 @@ import { CardComponent } from '../components/CardComponent';
 import { MerchantCard } from '../components/MerchantCard';
 import { sampleMerchants } from '../data/merchants';
 import '../theme/theme.css';
-import './Result.css';
+import './Status.css';
 
 const STORAGE_KEY = 'selected-merchants';
 

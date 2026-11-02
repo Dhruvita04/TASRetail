@@ -32,7 +32,7 @@ export function AuthenticationPage() {
         body: JSON.stringify({ otp }),
       });
 
-      navigate('/result');
+      navigate('/status');
     } catch (err) {
       setError('Invalid or expired OTP. Please try again.');
     } finally {

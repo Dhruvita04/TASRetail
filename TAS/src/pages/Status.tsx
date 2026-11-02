@@ -22,7 +22,8 @@ function getSelectedMerchants() {
   }
 }
 
-export function ResultPage() {
+
+export function StatusPage() {
   const navigate = useNavigate();
   const selectedTurs = getSelectedMerchants();
 

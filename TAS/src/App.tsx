@@ -6,7 +6,7 @@ import { HomePage } from './pages/Home';
 import './theme/theme.css';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { AuthenticationPage } from './pages/Authentication';
-import { ResultPage } from './pages/Result';
+import { StatusPage } from './pages/Status';
 import { ErrorPage } from './pages/ErrorPage';
 
 function AppContent() {
@@ -39,7 +39,7 @@ function AppContent() {
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/acs" element={<AuthenticationPage />} />
-        <Route path="/result" element={<ResultPage />} />
+        <Route path="/status" element={<StatusPage />} />
         <Route path="/error" element={<ErrorPage />} />
       </Routes>
     </ThemeProvider>

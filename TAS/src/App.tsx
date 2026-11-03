@@ -7,6 +7,7 @@ import './theme/theme.css';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { AuthenticationPage } from './pages/Authentication';
 import { StatusPage } from './pages/Status';
+import ResultPage from './pages/Result';
 import { ErrorPage } from './pages/ErrorPage';
 
 function AppContent() {
@@ -15,8 +16,9 @@ function AppContent() {
   // verify — that the whole app re-themes the instant sourceid changes.
   const [sourceid, setSourceid] = useState('HDFC'); // default to HDFC, matches reference screenshot
   const location = useLocation();
-  const shouldShowNavbar = location.pathname !== '/error';
-  const shouldShowBankPreview = location.pathname !== '/error';
+  const isStandalonePage = location.pathname === '/error' || location.pathname === '/result';
+  const shouldShowNavbar = !isStandalonePage;
+  const shouldShowBankPreview = !isStandalonePage;
 
   return (
     <ThemeProvider sourceid={sourceid}>
@@ -39,6 +41,7 @@ function AppContent() {
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/acs" element={<AuthenticationPage />} />
+        <Route path="/result" element={<ResultPage />} />
         <Route path="/status" element={<StatusPage />} />
         <Route path="/error" element={<ErrorPage />} />
       </Routes>
